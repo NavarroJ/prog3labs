@@ -1,8 +1,12 @@
 package labtwo;
 
+import java.util.Random;
+
 public class AminoQuiz {
 
 	public static void main(String[] args) {
+		
+		Random random = new Random();
 		
 		String[] SHORT_NAMES = 
 			{ "A","R", "N", "D", "C", "Q", "E", 
@@ -19,6 +23,27 @@ public class AminoQuiz {
 			"phenylalanine", "proline", 
 			"serine","threonine","tryptophan", 
 			"tyrosine", "valine"};
+		
+		long end = System.currentTimeMillis() + 30000;
+
+		int correct = 0;
+		while (System.currentTimeMillis() < end) {
+			int rand = random.nextInt(SHORT_NAMES.length - 1);
+			System.out.println("Type the one letter code for: " + FULL_NAMES[rand]);
+			String aString = System.console().readLine().toUpperCase();
+			if (aString.contentEquals(SHORT_NAMES[rand])) {
+				System.out.println("Correct");
+				correct += 1;
+			} else {
+				System.out.println("Incorrect: " + SHORT_NAMES[rand]);
+				System.out.println("Ending.");
+				break;
+			
+				}
+
+		}
+		System.out.println("Score: " + correct);
+		
 	}
 
 }
