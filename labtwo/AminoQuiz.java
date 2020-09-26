@@ -27,11 +27,12 @@ public class AminoQuiz {
 		long end = System.currentTimeMillis() + 30000;
 
 		int correct = 0;
+		
 		while (System.currentTimeMillis() < end) {
 			int rand = random.nextInt(SHORT_NAMES.length - 1);
 			System.out.println("Type the one letter code for: " + FULL_NAMES[rand]);
 			String aString = System.console().readLine().toUpperCase();
-			if (aString.contentEquals(SHORT_NAMES[rand])) {
+			if (aString.equals(SHORT_NAMES[rand])) {
 				System.out.println("Correct");
 				correct += 1;
 			} else {
@@ -42,6 +43,7 @@ public class AminoQuiz {
 				}
 
 		}
+		
 		System.out.println("Score: " + correct);
 		
 	}
