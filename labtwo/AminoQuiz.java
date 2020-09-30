@@ -35,6 +35,9 @@ public class AminoQuiz {
 			if (aString.equals(SHORT_NAMES[rand])) {
 				System.out.println("Correct");
 				correct += 1;
+			} else if (aString.equals("QUIT")){
+				System.out.println("Quitting...");
+				break;
 			} else {
 				System.out.println("Incorrect: " + SHORT_NAMES[rand]);
 				System.out.println("Ending.");
