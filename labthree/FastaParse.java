@@ -69,10 +69,11 @@ public class FastaParse {
 	public static void main(String[] args) throws Exception {
 		String in1 = "./test_files/GCF_003019965.1_ASM301996v1_genomic.fna";
 		String out1 = "./test_files/burkCounts.txt";
-		String in2 = "/test_files/test.fasta";
+		String in2 = "./test_files/test.fasta";
 		String out2 = "./test_files/testCounts.txt";
 		alleleCounts(in1,out1);
 		alleleCounts(in2,out2);
+		System.out.println("Done");
 		
 
 		}
