@@ -1,4 +1,0 @@
-Seq_ID	A_Count	T_Count	C_Count	G_Count
->NZ_CP020397.1 Burkholderia multivorans strain FDAARGOS_246 chromosome 1, complete sequence	568870	564389	1147934	1147192
->NZ_CP020398.1 Burkholderia multivorans strain FDAARGOS_246 chromosome 2, complete sequence	381250	379482	790226	793228
->NZ_CP020399.1 Burkholderia multivorans strain FDAARGOS_246 plasmid unnamed, complete sequence	87581	89668	187346	185693
