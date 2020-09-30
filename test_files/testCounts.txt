@@ -1,0 +1,3 @@
+Seq_ID	A_Count	T_Count	C_Count	G_Count
+>seq1	4	0	0	0
+>seq2	3	5	3	0
