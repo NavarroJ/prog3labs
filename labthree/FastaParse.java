@@ -38,6 +38,7 @@ public class FastaParse {
 			}
 		}
 		seqList.add(s.toString());
+		
 		String header = "Seq_ID\tA_Count\tT_Count\tC_Count\tG_Count\n";
 		writer.write(header);
 		for (int x = 0; x < seqList.size(); x++) {
