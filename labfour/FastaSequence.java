@@ -6,10 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class FastaSequence {
 	
@@ -25,7 +27,7 @@ public class FastaSequence {
 		return this.header;
 	}
 	
-	public String getSeq() {
+	public String getSequence() {
 		return this.seq;
 	}
 	
@@ -34,10 +36,7 @@ public class FastaSequence {
 		Map<Character, Integer> alleleCounts = new HashMap<Character, Integer>();
 		
 		for (int x = 0; x < this.seq.length(); x++) {
-			Integer count = alleleCounts.get(seq.charAt(x));
-			if (count == null) {
-				count = 0;
-			}
+			Integer count = alleleCounts.getOrDefault(this.seq.charAt(x),0);
 			count++;
 			alleleCounts.put(this.seq.charAt(x), count);
 			
@@ -54,24 +53,7 @@ public class FastaSequence {
 		
 	}
 	
-	public static void writeUnique(String pathIn, String pathOut) throws Exception {
-		File fastaIn = new File(pathIn);
-		File uniqueOut = new File(pathOut);
-		
-		BufferedReader reader = new BufferedReader(new FileReader(fastaIn));
-		BufferedWriter writer = new BufferedWriter(new FileWriter(uniqueOut));
-		
-		Map<Integer,String> seqCounts = new TreeMap<Integer,String>(); 
-		
-		for (String nextLine = reader.readLine(); nextLine != null; nextLine = reader.readLine()) {
-			if (nextLine.startsWith(">") == false) {
-				System.out.println(nextLine);
-			}
-		}
-		reader.close();
-		writer.flush(); writer.close();
-	}
-		
+
 	public static List<FastaSequence> readFastaFile(String path) throws Exception {
 		File fasta = new File(path);
 		BufferedReader reader = new BufferedReader(new FileReader(fasta));
@@ -93,9 +75,10 @@ public class FastaSequence {
 			} else {
 				s.append(nextLine);
 			}
+			
 		}
 		seqList.add(s.toString());
-		
+
 		for (int x = 0; x < seqList.size(); x++) {
 			FastaSequence f = new FastaSequence(headList.get(x),seqList.get(x));
 			fastaList.add(f);
@@ -104,5 +87,27 @@ public class FastaSequence {
 		return fastaList;
 	}
 	
-
+	public static void writeUnique(String pathIn, String pathOut) throws Exception {
+		List<FastaSequence> fastaList = FastaSequence.readFastaFile(pathIn);
+		File uniqueOut = new File(pathOut);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(uniqueOut));
+		Map<String,Integer> seqCounts = new LinkedHashMap<String, Integer>();
+		
+		for (FastaSequence fasta : fastaList) {
+			Integer count = seqCounts.getOrDefault(fasta.getSequence(),0);
+			count++;
+			seqCounts.put(fasta.getSequence(), count);
+		}
+		
+		Collection<Integer> allCounts = new TreeSet<Integer>(seqCounts.values());
+		
+		for (Integer v: allCounts) {
+			for (Map.Entry<String, Integer> e: seqCounts.entrySet()){
+				if (e.getValue().equals(v)) {
+					writer.write(">" + v.toString() + "\n" + e.getKey() + "\n");
+				}
+			}
+		}
+		writer.flush(); writer.close();
+	}
 }

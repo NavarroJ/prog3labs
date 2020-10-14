@@ -10,11 +10,12 @@ public class FastaSequenceAnalysis {
 		List<FastaSequence> fastaList = FastaSequence.readFastaFile(in1);
 		
 		for (FastaSequence f : fastaList) {
-			System.out.println(f.getGCRatio());
-			System.out.println(f.getSeq().length());
 			System.out.println(f.getHeader());
+			System.out.println(f.getSequence());
+			System.out.println(f.getGCRatio());
 			
 		}
+		
 		FastaSequence.writeUnique(in1, out1);
 	}
 
