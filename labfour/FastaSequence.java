@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -91,7 +90,7 @@ public class FastaSequence {
 		List<FastaSequence> fastaList = FastaSequence.readFastaFile(pathIn);
 		File uniqueOut = new File(pathOut);
 		BufferedWriter writer = new BufferedWriter(new FileWriter(uniqueOut));
-		Map<String,Integer> seqCounts = new LinkedHashMap<String, Integer>();
+		Map<String,Integer> seqCounts = new HashMap<String, Integer>();
 		
 		for (FastaSequence fasta : fastaList) {
 			Integer count = seqCounts.getOrDefault(fasta.getSequence(),0);
