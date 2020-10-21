@@ -7,9 +7,7 @@ public class TestSVGUI extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-//	private JMenuBar myMenuBar() {
-//		
-//	}
+	JMenuBar menuBar;
 
 	public TestSVGUI(String title) {
 		super(title);
