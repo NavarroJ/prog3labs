@@ -1,6 +1,7 @@
 package labfive;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +23,8 @@ public class TestSVGUI extends JFrame {
 	private final String IGV = "IGV Displayer";
 	private final String CC = "Computer Coverage";
 	private final String CST = "Color Sample Table";
+	private JButton browseButton = new JButton("Browse");
+	private JLabel inputFiles = new JLabel("Input");
 	
 	public TestSVGUI(String title) {
 		super(title);
@@ -61,8 +64,13 @@ public class TestSVGUI extends JFrame {
 	private JPanel igvDisplayPanel() {
 		JPanel panel = new JPanel();
 		JLabel sampleOrder = new JLabel("Sample Order: ");
+		panel.setLayout(new FlowLayout());
 		panel.add(sampleOrder);
 		panel.add(new JTextField(20));
+		panel.add(inputFiles);
+		panel.add(new JTextField(20));
+		panel.add(browseButton);
+	)
 
 		return panel;
 	}
