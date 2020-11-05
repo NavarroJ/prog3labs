@@ -67,7 +67,7 @@ public class SVGui extends JFrame {
 		panel.add(browser);
 		browser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Stuff.");
+				System.out.println("Stuff");
 			}
 		});
 		
