@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -21,10 +23,8 @@ public class TestSVGUI extends JFrame {
 	private JPanel cards;
 	private static final long serialVersionUID = 1L;
 	private final String IGV = "IGV Displayer";
-	private final String CC = "Computer Coverage";
+	private final String CC = "Compute Coverage";
 	private final String CST = "Color Sample Table";
-	private JButton browseButton = new JButton("Browse");
-	private JLabel inputFiles = new JLabel("Input");
 	
 	public TestSVGUI(String title) {
 		super(title);
@@ -33,6 +33,7 @@ public class TestSVGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		cards = new JPanel(new CardLayout());
+		cards.setMaximumSize(new Dimension(100,100));
 		cards.add(igvDisplayPanel(),IGV);
 		cards.add(compCovPanel(),CC);
 		cards.add(comparePanel(),CST);
@@ -63,14 +64,23 @@ public class TestSVGUI extends JFrame {
 	
 	private JPanel igvDisplayPanel() {
 		JPanel panel = new JPanel();
-		JLabel sampleOrder = new JLabel("Sample Order: ");
+		JButton browser = new JButton("Browse");
 		panel.setLayout(new FlowLayout());
-		panel.add(sampleOrder);
-		panel.add(new JTextField(20));
-		panel.add(inputFiles);
-		panel.add(new JTextField(20));
-		panel.add(browseButton);
-	)
+		panel.add(new JLabel("Upload Images"));
+		panel.add(browser);
+		browser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Stuff.");
+			}
+		});
+		
+//		panel.add(new JLabel("Input BED file"));
+//		panel.add(new JTextField(20));
+//		panel.add(new JButton("Browse"));
+//		panel.add(new JLabel("Sample Order"));
+//		panel.add(new JTextField(20));
+		
+	
 
 		return panel;
 	}
@@ -84,9 +94,17 @@ public class TestSVGUI extends JFrame {
 	private JPanel comparePanel() {
 		String[] colors = {"Pink", "Red", "Blue", "Green"};
 		JPanel panel = new JPanel();
+		JButton browser = new JButton("Browse");
 		JLabel colorLabel = new JLabel("Highlight Color");
 		JComboBox<String> colorCombo = new JComboBox<String>(colors);
+		panel.add(new JLabel("Input Table"));
+		panel.add(browser);
 		panel.setLayout(new FlowLayout());
+		browser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Stuff.");
+			}
+		});
 		panel.add(colorLabel);
 		panel.add(colorCombo);
 		return panel;
