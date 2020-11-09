@@ -177,7 +177,7 @@ public class AAQuiz extends JFrame {
 						}
 					int randInner = random.nextInt(SHORT_NAMES.length - 1);
 					aminoLabel.setText(FULL_NAMES[randInner]);
-					Thread.sleep(40000);
+					Thread.sleep(35000);
 				}
 			}
 			catch(Exception ex) {
