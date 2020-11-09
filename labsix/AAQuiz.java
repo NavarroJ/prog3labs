@@ -20,7 +20,6 @@ public class AAQuiz extends JFrame {
 	private int countdown = 30;
 	private int correct = 0;
 	private int incorrect = 0; 
-	private boolean cancel = false;
 	private JPanel cards;
 	private JButton startButton = new JButton("Start");
 	private JButton cancelButton = new JButton("Cancel");
@@ -125,7 +124,6 @@ public class AAQuiz extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				timer.stop();
 				countdown = 30;
-				cancel = true;
 			    CardLayout cl = (CardLayout)(cards.getLayout());
 			    cl.show(cards, "start");
 				
