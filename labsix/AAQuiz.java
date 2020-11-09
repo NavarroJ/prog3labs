@@ -101,11 +101,22 @@ public class AAQuiz extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Thread(new submitAction()).start();
+				String s = answer.getText();
+				String q = SHORT_NAMES[Arrays.asList(FULL_NAMES).indexOf(aminoLabel.getText())];
 
-		
-				
-			}
+				if (q.equals(s.toUpperCase())) {
+					correct++;
+					corLabel.setText("Correct: " + String.valueOf(correct));
+					answer.setText("");
+				} else {
+					incorrect++;
+					incorLabel.setText("Incorrect: " + String.valueOf(incorrect));
+					answer.setText("");
+					}
+				int randInner = random.nextInt(SHORT_NAMES.length - 1);
+				aminoLabel.setText(FULL_NAMES[randInner]);
+			}	
+			
 		});
 		
 		cancelButton.addActionListener(new ActionListener() {
@@ -157,37 +168,7 @@ public class AAQuiz extends JFrame {
 		return panel;
 	}
 	
-	private class submitAction implements Runnable {
 
-		@Override
-		public void run() {
-			try {
-				while(timer.isRunning() || ! cancel) {
-					String s = answer.getText();
-					String q = SHORT_NAMES[Arrays.asList(FULL_NAMES).indexOf(aminoLabel.getText())];
-
-					if (q.equals(s.toUpperCase())) {
-						correct++;
-						corLabel.setText("Correct: " + String.valueOf(correct));
-						answer.setText("");
-					} else {
-						incorrect++;
-						incorLabel.setText("Incorrect: " + String.valueOf(incorrect));
-						answer.setText("");
-						}
-					int randInner = random.nextInt(SHORT_NAMES.length - 1);
-					aminoLabel.setText(FULL_NAMES[randInner]);
-					Thread.sleep(35000);
-				}
-			}
-			catch(Exception ex) {
-				ex.printStackTrace();
-			}
-
-
-		}
-		
-	}
 	
 
 	public static void main(String[] args) {
