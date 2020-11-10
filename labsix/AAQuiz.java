@@ -24,19 +24,21 @@ public class AAQuiz extends JFrame {
 	private JButton startButton = new JButton("Start");
 	private JButton cancelButton = new JButton("Cancel");
 	private JButton submitButton = new JButton("Submit");
+//	private JButton backButton = new JButton("Back");
 	private JLabel timeLabel = new JLabel();
 	private JLabel aminoLabel = new JLabel();
 	private JLabel corLabel = new JLabel();
 	private JLabel incorLabel = new JLabel();
 	private JTextField answer = new JTextField(20);
+	private JLabel score = new JLabel();
 	private Timer timer;		
-	Random random = new Random();
-	String[] SHORT_NAMES = 
+	private Random random = new Random();
+	private String[] SHORT_NAMES = 
 		{ "A","R", "N", "D", "C", "Q", "E", 
 		"G",  "H", "I", "L", "K", "M", "F", 
 		"P", "S", "T", "W", "Y", "V" };
 	
-	String[] FULL_NAMES = 
+	private String[] FULL_NAMES = 
 		{
 		"alanine","arginine", "asparagine", 
 		"aspartic acid", "cysteine",
@@ -60,9 +62,9 @@ public class AAQuiz extends JFrame {
 				timeLabel.setText("Time Remaining: " + String.valueOf(countdown));
 				if(countdown <= 0) {
 					timer.stop();
-					System.out.println(correct);
+					cards.add(scorePanel(correct, incorrect), "score");
 				    CardLayout cl = (CardLayout)(cards.getLayout());
-				    cl.show(cards, "start");
+				    cl.show(cards, "score");
 
 				}
 			}
@@ -71,7 +73,6 @@ public class AAQuiz extends JFrame {
 		cards = new JPanel(new CardLayout());
 		cards.add(startPanel(), "start");
 		cards.add(quizPanel(), "quiz");
-		cards.add(scorePanel(), "score");
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(cards, BorderLayout.CENTER);
 		setVisible(true);
@@ -114,6 +115,7 @@ public class AAQuiz extends JFrame {
 					}
 				int randInner = random.nextInt(SHORT_NAMES.length - 1);
 				aminoLabel.setText(FULL_NAMES[randInner]);
+				
 			}	
 			
 		});
@@ -124,8 +126,9 @@ public class AAQuiz extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				timer.stop();
 				countdown = 30;
+				cards.add(scorePanel(correct, incorrect), "score");
 			    CardLayout cl = (CardLayout)(cards.getLayout());
-			    cl.show(cards, "start");
+			    cl.show(cards, "score");
 				
 
 			}
@@ -137,9 +140,10 @@ public class AAQuiz extends JFrame {
 	}
 	
 	private JPanel startPanel() {
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.add(new JLabel("Press start to begin the quiz."), BorderLayout.CENTER);
+		panel.add(new JLabel("Provide the one letter code for each full amino acid name displayed. You have " + String.valueOf(countdown) + " seconds to complete the quiz. Press start to begin."), BorderLayout.CENTER);
 		panel.add(startButton, BorderLayout.SOUTH);
 		startButton.addActionListener(new ActionListener() {
 
@@ -154,20 +158,30 @@ public class AAQuiz extends JFrame {
 			
 		});
 		
-
 		return panel;
 		
 	}
 	
-	private JPanel scorePanel() {
+	private JPanel scorePanel(int c, int i) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		panel.add(new JLabel("You got: " + String.valueOf(correct) + " correct and " + String.valueOf(incorrect) + " incorrect."));
+		panel.setLayout(new BorderLayout());
+		score.setText("You got: " + String.valueOf(c) + " correct and " + String.valueOf(i) + " incorrect.");
+		panel.add(score, BorderLayout.CENTER);
+		panel.add(backButton, BorderLayout.SOUTH);
+//		backButton.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//			    CardLayout cl = (CardLayout)(cards.getLayout());
+//			    cl.show(cards, "start");
+//
+//			}
+//			
+//		});
 		return panel;
 	}
 	
 
-	
 
 	public static void main(String[] args) {
 		new AAQuiz("Amino Acid Quiz");
