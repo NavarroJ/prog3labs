@@ -24,7 +24,6 @@ public class AAQuiz extends JFrame {
 	private JButton startButton = new JButton("Start");
 	private JButton cancelButton = new JButton("Cancel");
 	private JButton submitButton = new JButton("Submit");
-//	private JButton backButton = new JButton("Back");
 	private JLabel timeLabel = new JLabel();
 	private JLabel aminoLabel = new JLabel();
 	private JLabel corLabel = new JLabel();
@@ -167,17 +166,6 @@ public class AAQuiz extends JFrame {
 		panel.setLayout(new BorderLayout());
 		score.setText("You got: " + String.valueOf(c) + " correct and " + String.valueOf(i) + " incorrect.");
 		panel.add(score, BorderLayout.CENTER);
-		panel.add(backButton, BorderLayout.SOUTH);
-//		backButton.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//			    CardLayout cl = (CardLayout)(cards.getLayout());
-//			    cl.show(cards, "start");
-//
-//			}
-//			
-//		});
 		return panel;
 	}
 	
