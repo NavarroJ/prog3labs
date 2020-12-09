@@ -143,7 +143,6 @@ public class SlowGUI extends JFrame {
 					
 				}
 				catch(Exception ex) {
-					ex.printStackTrace();
 					CardLayout cl = (CardLayout)(cards.getLayout());
 					cl.show(cards, "start");
 				}
@@ -188,8 +187,8 @@ public class SlowGUI extends JFrame {
 				}
 				endTime = System.currentTimeMillis();
 				calcTime = (endTime - startTime) / (float) 1000;
-				valueDisplay.append("Total counts: " + String.valueOf(count)+ " from " + String.valueOf(endNum) + "\n" + "\n");
-				valueDisplay.append("Time: " + String.valueOf(calcTime) + "\n");
+				valueDisplay.append("Total " + String.valueOf(digit) + " counts: " + String.valueOf(count)+ " from " + String.valueOf(endNum) + "\n" + "\n");
+				valueDisplay.append("Time: " + String.valueOf(calcTime) + " seconds" + "\n");
 			
 			}
 			catch(Exception ex) {
